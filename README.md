@@ -1,10 +1,10 @@
 ```markdown
 # Relatório da Atividade 3 - Paralelização de Avaliador de Logs
 
-**Disciplina:** Programação Concorrente e Distribuída
-**Aluno(s):** Oliver Henrique Ferreira
-**Professor:** Rafael Marconi
-**Data:** 25/03/2026
+Disciplina: Programação Concorrente e Distribuída
+Aluno(s): Oliver Henrique Ferreira
+Professor: Rafael Marconi
+Data: 25/03/2026
 
 ---
 
@@ -12,10 +12,10 @@
 
 O problema computacional consiste em processar sequencialmente grandes volumes de arquivos de texto (logs operacionais), o que gera um gargalo de desempenho elevado (alto tempo de execução). O objetivo da paralelização é reduzir significativamente esse tempo de processamento aproveitando a arquitetura multicore dos processadores modernos.
 
-* **Qual problema foi implementado:** A transformação de um leitor e processador de logs sequencial para uma versão paralela.
-* **Qual algoritmo foi utilizado:** Foi utilizado o modelo **Produtor-Consumidor** com buffer limitado (`Queue` com `maxsize=10`). O Produtor enfileira os caminhos dos arquivos de log, enquanto múltiplos Consumidores desenfileiram e realizam a contagem de palavras-chave.
-* **Qual o tamanho da entrada utilizada nos testes:** Foram processados os dados da pasta `log2`, contendo 1.000 arquivos, totalizando 10.000.000 de linhas, 200.000.000 de palavras e aproximadamente 1,36 GB de caracteres em texto bruto.
-* **Qual a complexidade aproximada do algoritmo:** Linear, `O(N * M)`, onde `N` é o número de linhas e `M` é o número de palavras por linha, acrescido de uma simulação de processamento pesado em cada iteração.
+* Qual problema foi implementado: A transformação de um leitor e processador de logs sequencial para uma versão paralela.
+* Qual algoritmo foi utilizado: Foi utilizado o modelo **Produtor-Consumidor** com buffer limitado (`Queue` com `maxsize=10`). O Produtor enfileira os caminhos dos arquivos de log, enquanto múltiplos Consumidores desenfileiram e realizam a contagem de palavras-chave.
+* Qual o tamanho da entrada utilizada nos testes: Foram processados os dados da pasta `log2`, contendo 1.000 arquivos, totalizando 10.000.000 de linhas, 200.000.000 de palavras e aproximadamente 1,36 GB de caracteres em texto bruto.
+* Qual a complexidade aproximada do algoritmo: Linear, `O(N * M)`, onde `N` é o número de linhas e `M` é o número de palavras por linha, acrescido de uma simulação de processamento pesado em cada iteração.
 
 ---
 
