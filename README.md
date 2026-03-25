@@ -1,4 +1,4 @@
-```markdown
+
 # Relatório da Atividade 3 - Paralelização de Avaliador de Logs
 
 Disciplina: Programação Concorrente e Distribuída
@@ -82,8 +82,8 @@ Speedup(p) = T(1) / T(p)
 
 Onde:
 
-* **T(1)** = tempo da execução serial
-* **T(p)** = tempo com p threads/processos
+* T(1) = tempo da execução serial
+* T(p) = tempo com p threads/processos
 
 ### Eficiência
 
@@ -93,7 +93,7 @@ Eficiência(p) = Speedup(p) / p
 
 Onde:
 
-* **p** = número de threads ou processos
+* p = número de threads ou processos
 
 ---
 
@@ -129,18 +129,18 @@ Onde:
 
 # 10. Análise dos Resultados
 
-* **O speedup obtido foi próximo do ideal?** Apenas nas fases iniciais. Com 2 processos, o Speedup (1.84) ficou bem próximo do ideal (2.0). Com 4 processos (3.20), ainda se manteve em um patamar excelente.
-* **A aplicação apresentou escalabilidade?** Sim, o tempo de execução cai vertiginosamente ao aumentar a quantidade de trabalhadores. O processamento que demorava 94 segundos caiu para 16 segundos no cenário com 12 processos.
-* **Em qual ponto a eficiência começou a cair?** A partir da configuração com 8 processos a queda se torna mais acentuada (eficiência de 64.5%), e com 12 processos menos da metade do poder de cada processo está sendo aproveitado efetivamente (48.5%).
-* **O número de threads ultrapassa o número de núcleos físicos da máquina?** Considerando que o ganho é marginal na transição de 8 para 12 processos (apenas 2 segundos), é muito provável que 12 processos ultrapasse o limite de núcleos físicos e lógicos da máquina utilizada no teste, obrigando o sistema operacional a intervir intensamente.
-* **Houve overhead de paralelização?** Sim. Quando utilizamos 12 processos, o *overhead* (custo de criar os processos, alternar contextos de CPU e gerenciar as filas `Queue` com tráfego pesado de dados e *locks* de segurança) começa a consumir tempo de CPU que deveria ser gasto processando o log. Outro fator decisivo para o gargalo é o acesso ao disco (I/O); o processo Produtor pode não estar conseguindo ler o disco rígido em velocidade suficiente para manter os 12 consumidores ocupados 100% do tempo.
+* O speedup obtido foi próximo do ideal? Apenas nas fases iniciais. Com 2 processos, o Speedup (1.84) ficou bem próximo do ideal (2.0). Com 4 processos (3.20), ainda se manteve em um patamar excelente.
+* A aplicação apresentou escalabilidade? Sim, o tempo de execução cai vertiginosamente ao aumentar a quantidade de trabalhadores. O processamento que demorava 94 segundos caiu para 16 segundos no cenário com 12 processos.
+* Em qual ponto a eficiência começou a cair? A partir da configuração com 8 processos a queda se torna mais acentuada (eficiência de 64.5%), e com 12 processos menos da metade do poder de cada processo está sendo aproveitado efetivamente (48.5%).
+* O número de threads ultrapassa o número de núcleos físicos da máquina?** Considerando que o ganho é marginal na transição de 8 para 12 processos (apenas 2 segundos), é muito provável que 12 processos ultrapasse o limite de núcleos físicos e lógicos da máquina utilizada no teste, obrigando o sistema operacional a intervir intensamente.
+* Houve overhead de paralelização? Sim. Quando utilizamos 12 processos, o *overhead* (custo de criar os processos, alternar contextos de CPU e gerenciar as filas `Queue` com tráfego pesado de dados e *locks* de segurança) começa a consumir tempo de CPU que deveria ser gasto processando o log. Outro fator decisivo para o gargalo é o acesso ao disco (I/O); o processo Produtor pode não estar conseguindo ler o disco rígido em velocidade suficiente para manter os 12 consumidores ocupados 100% do tempo.
 
 ---
 
 # 11. Conclusão
 
-* **O paralelismo trouxe ganho significativo de desempenho?** Sim, o sistema ficou até 5.8 vezes mais rápido, reduzindo drasticamente o tempo necessário para processar grandes lotes de arquivos de log.
-* **Qual foi o melhor número de threads/processos?** O *sweet-spot* (ponto de equilíbrio ideal) verificado é em **4 ou 8 processos**. Essas configurações oferecem tempos totais excelentes mantendo a eficiência do uso da CPU em bons níveis.
-* **O programa escala bem com o aumento do paralelismo?** Escala bem nas primeiras adições de núcleos, mas sofre com a Lei de Amdahl conforme aumentamos demais.
-* **Quais melhorias poderiam ser feitas na implementação?** Poderíamos adotar *batches* (enviar caminhos de 10 em 10 arquivos pela fila, reduzindo as travas do Produtor-Consumidor) ou separar a leitura do disco do processamento da string, limitando ainda mais o impacto das operações de I/O de disco rígido.
-```
+* O paralelismo trouxe ganho significativo de desempenho? Sim, o sistema ficou até 5.8 vezes mais rápido, reduzindo drasticamente o tempo necessário para processar grandes lotes de arquivos de log.
+* Qual foi o melhor número de threads/processos?** O *sweet-spot* (ponto de equilíbrio ideal) verificado é em **4 ou 8 processos**. Essas configurações oferecem tempos totais excelentes mantendo a eficiência do uso da CPU em bons níveis.
+* O programa escala bem com o aumento do paralelismo? Escala bem nas primeiras adições de núcleos, mas sofre com a Lei de Amdahl conforme aumentamos demais.
+* Quais melhorias poderiam ser feitas na implementação? Poderíamos adotar *batches* (enviar caminhos de 10 em 10 arquivos pela fila, reduzindo as travas do Produtor-Consumidor) ou separar a leitura do disco do processamento da string, limitando ainda mais o impacto das operações de I/O de disco rígido.
+
